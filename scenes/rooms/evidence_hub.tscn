@@ -1,0 +1,222 @@
+[gd_scene load_steps=26 format=3 uid="uid://evidence_hub_room"]
+
+[ext_resource type="PackedScene" uid="uid://alarm_strobe_prop" path="res://scenes/props/alarm_strobe.tscn" id="1_strobe"]
+[ext_resource type="PackedScene" uid="uid://emergency_exit_sign_prop" path="res://scenes/props/emergency_exit_sign.tscn" id="2_exit"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor_hub"]
+albedo_color = Color(0.24, 0.2, 0.16, 1)
+roughness = 0.7
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor_hub"]
+material = SubResource("StandardMaterial3D_floor_hub")
+size = Vector3(7.4, 0.2, 7.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor_hub"]
+size = Vector3(7.4, 0.2, 7.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall_hub"]
+albedo_color = Color(0.28, 0.24, 0.2, 1)
+roughness = 0.85
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_half_hub"]
+material = SubResource("StandardMaterial3D_wall_hub")
+size = Vector3(3.0, 3.5, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_half_hub"]
+size = Vector3(3.0, 3.5, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_lintel_hub"]
+material = SubResource("StandardMaterial3D_wall_hub")
+size = Vector3(1.4, 1.2, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_lintel_hub"]
+size = Vector3(1.4, 1.2, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_solid_hub"]
+material = SubResource("StandardMaterial3D_wall_hub")
+size = Vector3(7.4, 3.5, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_solid_hub"]
+size = Vector3(7.4, 3.5, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_side_hub"]
+material = SubResource("StandardMaterial3D_wall_hub")
+size = Vector3(0.15, 3.5, 7.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_side_hub"]
+size = Vector3(0.15, 3.5, 7.4)
+
+; Emergency Exit Door (Safe Zone)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_exit_door"]
+albedo_color = Color(0.1, 0.5, 0.2, 1)
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_exit_door"]
+material = SubResource("StandardMaterial3D_exit_door")
+size = Vector3(1.4, 2.4, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_evacuation_zone"]
+size = Vector3(2.5, 2.5, 2.0)
+
+; Fire Alarm Control Panel
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_alarm_panel"]
+albedo_color = Color(0.8, 0.1, 0.1, 1)
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_alarm_panel"]
+material = SubResource("StandardMaterial3D_alarm_panel")
+size = Vector3(0.6, 0.8, 0.08)
+
+; Filing Cabinet
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cabinet"]
+albedo_color = Color(0.22, 0.25, 0.28, 1)
+metallic = 0.8
+roughness = 0.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_cabinet"]
+material = SubResource("StandardMaterial3D_cabinet")
+size = Vector3(0.6, 1.4, 0.7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cabinet"]
+size = Vector3(0.6, 1.4, 0.7)
+
+; Oak Desk
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oak"]
+albedo_color = Color(0.45, 0.28, 0.15, 1)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_oak_desk"]
+material = SubResource("StandardMaterial3D_oak")
+size = Vector3(2.0, 0.8, 1.0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oak_desk"]
+size = Vector3(2.0, 0.8, 1.0)
+
+[node name="EvidenceHub" type="Node3D"]
+
+; Architecture
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_floor_hub")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_floor_hub")
+
+[node name="Ceiling" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ceiling"]
+mesh = SubResource("BoxMesh_floor_hub")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ceiling"]
+shape = SubResource("BoxShape3D_floor_hub")
+
+; Wall Front at Z = 3.65
+[node name="WallFrontLeft" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 1.75, 3.65)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallFrontLeft"]
+mesh = SubResource("BoxMesh_wall_half_hub")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallFrontLeft"]
+shape = SubResource("BoxShape3D_wall_half_hub")
+
+[node name="WallFrontRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 1.75, 3.65)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallFrontRight"]
+mesh = SubResource("BoxMesh_wall_half_hub")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallFrontRight"]
+shape = SubResource("BoxShape3D_wall_half_hub")
+
+[node name="WallFrontLintel" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 3.65)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallFrontLintel"]
+mesh = SubResource("BoxMesh_wall_lintel_hub")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallFrontLintel"]
+shape = SubResource("BoxShape3D_wall_lintel_hub")
+
+; Back Wall with Safe Emergency Exit Door
+[node name="WallBack" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -3.65)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallBack"]
+mesh = SubResource("BoxMesh_wall_solid_hub")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallBack"]
+shape = SubResource("BoxShape3D_wall_solid_hub")
+
+[node name="EmergencyExitDoor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -3.58)
+mesh = SubResource("BoxMesh_exit_door")
+
+[node name="ExitSign" parent="." instance=ExtResource("2_exit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.65, -3.55)
+
+; Evacuation Trigger Zone
+[node name="EvacuationZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -2.8)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EvacuationZone"]
+shape = SubResource("BoxShape3D_evacuation_zone")
+
+[node name="WallLeft" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.65, 1.75, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallLeft"]
+mesh = SubResource("BoxMesh_wall_side_hub")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallLeft"]
+shape = SubResource("BoxShape3D_wall_side_hub")
+
+[node name="WallRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.65, 1.75, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallRight"]
+mesh = SubResource("BoxMesh_wall_side_hub")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallRight"]
+shape = SubResource("BoxShape3D_wall_side_hub")
+
+; Building Fire Alarm Control Panel
+[node name="AlarmControlPanel" type="MeshInstance3D" parent="WallRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08, 0.1, -1.0)
+mesh = SubResource("BoxMesh_alarm_panel")
+
+; Ceiling Alarm Strobe
+[node name="CeilingAlarmStrobe" parent="." instance=ExtResource("1_strobe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 0)
+
+; Furniture & Desk
+[node name="FilingCabinet" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 0.7, -1.8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FilingCabinet"]
+mesh = SubResource("BoxMesh_cabinet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FilingCabinet"]
+shape = SubResource("BoxShape3D_cabinet")
+
+[node name="OakDesk" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="OakDesk"]
+mesh = SubResource("BoxMesh_oak_desk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OakDesk"]
+shape = SubResource("BoxShape3D_oak_desk")
+
+; Room Lighting
+[node name="CommandLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 2.2
+omni_range = 6.0
+omni_attenuation = 1.0

@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://magnifying_glass_prop"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_glass"]
+size = Vector3(0.2, 0.05, 0.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brass"]
+albedo_color = Color(0.8, 0.6, 0.2, 1)
+roughness = 0.2
+metallic = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_handle"]
+material = SubResource("StandardMaterial3D_brass")
+top_radius = 0.015
+bottom_radius = 0.015
+height = 0.18
+
+[sub_resource type="TorusMesh" id="TorusMesh_rim"]
+material = SubResource("StandardMaterial3D_brass")
+inner_radius = 0.07
+outer_radius = 0.085
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lens"]
+transparency = 1
+albedo_color = Color(0.9, 0.95, 1, 0.2)
+roughness = 0.05
+metallic = 0.1
+refraction_enabled = true
+refraction_scale = 0.02
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lens"]
+material = SubResource("StandardMaterial3D_lens")
+top_radius = 0.07
+bottom_radius = 0.07
+height = 0.005
+
+[node name="MagnifyingGlass" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0.05)
+shape = SubResource("BoxShape3D_glass")
+
+[node name="Handle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.015, -0.05)
+mesh = SubResource("CylinderMesh_handle")
+
+[node name="Rim" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0.1)
+mesh = SubResource("TorusMesh_rim")
+
+[node name="Lens" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0.1)
+mesh = SubResource("CylinderMesh_lens")

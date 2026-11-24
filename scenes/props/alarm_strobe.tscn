@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://alarm_strobe_prop"]
+
+[sub_resource type="GDScript" id="GDScript_strobe"]
+script/source = "extends Node3D
+
+@onready var beacon_light: OmniLight3D = $BeaconLight
+@onready var lens_mesh: MeshInstance3D = $Lens
+
+var _time: float = 0.0
+
+func _process(delta: float) -> void:
+	_time += delta * 6.0
+	var flash = sin(_time) > 0.0
+	if beacon_light:
+		beacon_light.light_energy = 4.0 if flash else 0.2
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_casing"]
+albedo_color = Color(0.8, 0.1, 0.1, 1)
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_casing"]
+material = SubResource("StandardMaterial3D_casing")
+size = Vector3(0.22, 0.22, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amber_lens"]
+albedo_color = Color(1, 0.2, 0.1, 1)
+emission_enabled = true
+emission = Color(1, 0.15, 0.1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lens"]
+material = SubResource("StandardMaterial3D_amber_lens")
+top_radius = 0.07
+bottom_radius = 0.08
+height = 0.08
+
+[node name="AlarmStrobe" type="Node3D"]
+script = SubResource("GDScript_strobe")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_casing")
+
+[node name="Lens" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.05)
+mesh = SubResource("CylinderMesh_lens")
+
+[node name="BeaconLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+light_color = Color(1, 0.15, 0.1, 1)
+light_energy = 3.5
+omni_range = 7.0
+omni_attenuation = 1.0

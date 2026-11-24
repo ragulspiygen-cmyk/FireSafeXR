@@ -1,0 +1,90 @@
+[gd_scene load_steps=16 format=3 uid="uid://fire_hazard_prop"]
+
+[ext_resource type="Script" path="res://scripts/fire_hazard.gd" id="1_hazard"]
+
+[sub_resource type="StandardMaterial3D" id="M_core"]
+albedo_color = Color(1, 0.72, 0.1, 1)
+emission_enabled = true
+emission = Color(1, 0.55, 0.05, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="CylinderMesh" id="CM_flame_core"]
+material = SubResource("M_core")
+top_radius = 0.02
+bottom_radius = 0.28
+height = 0.72
+
+[sub_resource type="StandardMaterial3D" id="M_outer"]
+transparency = 1
+albedo_color = Color(0.95, 0.22, 0.05, 0.82)
+emission_enabled = true
+emission = Color(0.9, 0.2, 0.05, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="CylinderMesh" id="CM_flame_outer"]
+material = SubResource("M_outer")
+top_radius = 0.03
+bottom_radius = 0.38
+height = 0.95
+
+[sub_resource type="StandardMaterial3D" id="M_smoke"]
+transparency = 1
+albedo_color = Color(0.16, 0.16, 0.18, 0.46)
+roughness = 0.95
+
+[sub_resource type="SphereMesh" id="SM_smoke"]
+material = SubResource("M_smoke")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="CylinderShape3D" id="CS_base"]
+height = 0.22
+radius = 0.42
+
+[sub_resource type="SphereShape3D" id="SS_detect"]
+radius = 3.2
+
+[node name="FireHazard" type="Node3D"]
+script = ExtResource("1_hazard")
+
+[node name="Flames" type="Node3D" parent="."]
+
+[node name="Flame1" type="MeshInstance3D" parent="Flames"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36, 0)
+mesh = SubResource("CM_flame_core")
+
+[node name="Flame2" type="MeshInstance3D" parent="Flames"]
+transform = Transform3D(0.766, 0, 0.643, 0, 1, 0, -0.643, 0, 0.766, 0, 0.48, 0)
+mesh = SubResource("CM_flame_outer")
+
+[node name="FireLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+light_color = Color(1, 0.55, 0.12, 1)
+light_energy = 3.2
+omni_range = 5.5
+omni_attenuation = 1.0
+
+[node name="SmokeParticles" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+amount = 20
+lifetime = 1.5
+mesh = SubResource("SM_smoke")
+emission_shape = 1
+emission_sphere_radius = 0.12
+direction = Vector3(0, 1, 0)
+spread = 18.0
+gravity = Vector3(0, 0.4, 0)
+initial_velocity_min = 0.8
+initial_velocity_max = 1.8
+scale_amount_min = 1.0
+scale_amount_max = 2.8
+
+[node name="BaseArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0)
+[node name="CS" type="CollisionShape3D" parent="BaseArea"]
+shape = SubResource("CS_base")
+
+[node name="DetectionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 0)
+[node name="CS" type="CollisionShape3D" parent="DetectionArea"]
+shape = SubResource("SS_detect")

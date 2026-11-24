@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://beaker_prop"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_beaker"]
+height = 0.2
+radius = 0.08
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glass"]
+transparency = 1
+albedo_color = Color(0.9, 0.96, 1, 0.25)
+roughness = 0.05
+metallic = 0.1
+refraction_enabled = true
+refraction_scale = 0.03
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_beaker"]
+material = SubResource("StandardMaterial3D_glass")
+top_radius = 0.075
+bottom_radius = 0.075
+height = 0.18
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fluid"]
+albedo_color = Color(0.85, 0.1, 0.2, 0.85)
+emission_enabled = true
+emission = Color(0.4, 0.05, 0.1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fluid"]
+material = SubResource("StandardMaterial3D_fluid")
+top_radius = 0.07
+bottom_radius = 0.07
+height = 0.1
+
+[node name="Beaker" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("CylinderShape3D_beaker")
+
+[node name="GlassOuter" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0)
+mesh = SubResource("CylinderMesh_beaker")
+
+[node name="FluidInner" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.055, 0)
+mesh = SubResource("CylinderMesh_fluid")

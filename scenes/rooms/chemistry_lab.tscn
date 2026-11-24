@@ -1,0 +1,305 @@
+[gd_scene load_steps=32 format=3 uid="uid://chemistry_lab_room"]
+
+[ext_resource type="Script" path="res://scripts/door.gd" id="1_door"]
+[ext_resource type="PackedScene" uid="uid://beaker_prop" path="res://scenes/props/beaker.tscn" id="2_beaker"]
+[ext_resource type="PackedScene" uid="uid://test_tube_prop" path="res://scenes/props/test_tube.tscn" id="3_test_tube"]
+[ext_resource type="PackedScene" uid="uid://fire_hazard_prop" path="res://scenes/props/fire_hazard.tscn" id="4_fire"]
+[ext_resource type="PackedScene" uid="uid://alarm_strobe_prop" path="res://scenes/props/alarm_strobe.tscn" id="5_strobe"]
+[ext_resource type="PackedScene" uid="uid://emergency_exit_sign_prop" path="res://scenes/props/emergency_exit_sign.tscn" id="6_exit"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor_lab"]
+albedo_color = Color(0.14, 0.16, 0.2, 1)
+roughness = 0.7
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor_lab"]
+material = SubResource("StandardMaterial3D_floor_lab")
+size = Vector3(8.4, 0.2, 8.0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor_lab"]
+size = Vector3(8.4, 0.2, 8.0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall_lab"]
+albedo_color = Color(0.18, 0.22, 0.26, 1)
+roughness = 0.85
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_half_lab"]
+material = SubResource("StandardMaterial3D_wall_lab")
+size = Vector3(3.5, 3.5, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_half_lab"]
+size = Vector3(3.5, 3.5, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_lintel_lab"]
+material = SubResource("StandardMaterial3D_wall_lab")
+size = Vector3(1.4, 1.2, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_lintel_lab"]
+size = Vector3(1.4, 1.2, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_side_lab"]
+material = SubResource("StandardMaterial3D_wall_lab")
+size = Vector3(0.15, 3.5, 8.0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_side_lab"]
+size = Vector3(0.15, 3.5, 8.0)
+
+; Biohazard Safety Warning Sign
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_safety_sign"]
+albedo_color = Color(0.95, 0.8, 0.05, 1)
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_safety_sign"]
+material = SubResource("StandardMaterial3D_safety_sign")
+size = Vector3(0.6, 0.4, 0.01)
+
+; Fume Hood Unit
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fume_steel"]
+albedo_color = Color(0.25, 0.28, 0.32, 1)
+metallic = 0.85
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_fume_body"]
+material = SubResource("StandardMaterial3D_fume_steel")
+size = Vector3(1.2, 2.1, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fume_hood"]
+size = Vector3(1.2, 2.1, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fume_glass"]
+transparency = 1
+albedo_color = Color(0.6, 0.85, 1, 0.25)
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_fume_window"]
+material = SubResource("StandardMaterial3D_fume_glass")
+size = Vector3(1.0, 0.8, 0.02)
+
+; Lab Bench & Counter
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_counter_top"]
+albedo_color = Color(0.22, 0.28, 0.35, 1)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_bench"]
+material = SubResource("StandardMaterial3D_counter_top")
+size = Vector3(1.4, 0.9, 4.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bench"]
+size = Vector3(1.4, 0.9, 4.2)
+
+; Lab Computer Workstation
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lab_monitor"]
+albedo_color = Color(0.12, 0.14, 0.16, 1)
+metallic = 0.7
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_lab_monitor_screen"]
+material = SubResource("StandardMaterial3D_lab_monitor")
+size = Vector3(0.55, 0.35, 0.03)
+
+; Centrifuge
+[sub_resource type="CylinderMesh" id="CylinderMesh_centrifuge"]
+material = SubResource("StandardMaterial3D_counter_top")
+top_radius = 0.28
+bottom_radius = 0.28
+height = 0.3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_centrifuge"]
+height = 0.3
+radius = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_door"]
+albedo_color = Color(0.2, 0.3, 0.4, 1)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_door"]
+material = SubResource("StandardMaterial3D_door")
+size = Vector3(1.3, 2.25, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_door"]
+size = Vector3(1.3, 2.25, 0.08)
+
+[node name="ChemistryLab" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_floor_lab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_floor_lab")
+
+[node name="Ceiling" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ceiling"]
+mesh = SubResource("BoxMesh_floor_lab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ceiling"]
+shape = SubResource("BoxShape3D_floor_lab")
+
+; Wall Architecture
+[node name="WallFrontLeft" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45, 1.75, 3.95)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallFrontLeft"]
+mesh = SubResource("BoxMesh_wall_half_lab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallFrontLeft"]
+shape = SubResource("BoxShape3D_wall_half_lab")
+
+[node name="WallFrontRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45, 1.75, 3.95)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallFrontRight"]
+mesh = SubResource("BoxMesh_wall_half_lab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallFrontRight"]
+shape = SubResource("BoxShape3D_wall_half_lab")
+
+[node name="WallFrontLintel" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 3.95)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallFrontLintel"]
+mesh = SubResource("BoxMesh_wall_lintel_lab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallFrontLintel"]
+shape = SubResource("BoxShape3D_wall_lintel_lab")
+
+[node name="WallBackLeft" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45, 1.75, -3.95)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallBackLeft"]
+mesh = SubResource("BoxMesh_wall_half_lab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallBackLeft"]
+shape = SubResource("BoxShape3D_wall_half_lab")
+
+[node name="WallBackRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45, 1.75, -3.95)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallBackRight"]
+mesh = SubResource("BoxMesh_wall_half_lab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallBackRight"]
+shape = SubResource("BoxShape3D_wall_half_lab")
+
+[node name="WallBackLintel" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, -3.95)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallBackLintel"]
+mesh = SubResource("BoxMesh_wall_lintel_lab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallBackLintel"]
+shape = SubResource("BoxShape3D_wall_lintel_lab")
+
+[node name="WallLeft" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15, 1.75, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallLeft"]
+mesh = SubResource("BoxMesh_wall_side_lab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallLeft"]
+shape = SubResource("BoxShape3D_wall_side_lab")
+
+[node name="WallRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15, 1.75, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallRight"]
+mesh = SubResource("BoxMesh_wall_side_lab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallRight"]
+shape = SubResource("BoxShape3D_wall_side_lab")
+
+; Safety Warning Sign
+[node name="SafetySign" type="MeshInstance3D" parent="WallRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08, 0.4, 0)
+mesh = SubResource("BoxMesh_safety_sign")
+
+; Chemical Hazard Fume Hood Unit
+[node name="FumeHood" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4, 1.05, -1.2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FumeHood"]
+mesh = SubResource("BoxMesh_fume_body")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FumeHood"]
+shape = SubResource("BoxShape3D_fume_hood")
+
+[node name="GlassShield" type="MeshInstance3D" parent="FumeHood"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.1, -0.38)
+mesh = SubResource("BoxMesh_fume_window")
+
+; Lab Bench & Diagnostic Computer
+[node name="LabBench" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.45, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LabBench"]
+mesh = SubResource("BoxMesh_bench")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LabBench"]
+shape = SubResource("BoxShape3D_bench")
+
+[node name="LabMonitor" type="MeshInstance3D" parent="LabBench"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0.4)
+mesh = SubResource("BoxMesh_lab_monitor_screen")
+
+[node name="CentrifugeMachine" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 1.05, -1.4)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CentrifugeMachine"]
+mesh = SubResource("CylinderMesh_centrifuge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CentrifugeMachine"]
+shape = SubResource("CylinderShape3D_centrifuge")
+
+[node name="BeakerRed" parent="." instance=ExtResource("2_beaker")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.91, -0.2)
+
+[node name="StandaloneTestTube" parent="." instance=ExtResource("3_test_tube")]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -1.2, 0.91, -0.8)
+
+; Secondary Chemical Spill Fire Hazard
+[node name="ChemicalSpillFire" parent="." instance=ExtResource("4_fire")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.91, 1.2)
+hazard_name = "Class B Chemical Spill Fire"
+
+; Ceiling Alarm Strobe
+[node name="CeilingAlarmStrobe" parent="." instance=ExtResource("5_strobe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 0)
+
+; Exit Sign pointing to Room 3
+[node name="ExitSign" parent="." instance=ExtResource("6_exit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45, -3.85)
+
+; Doorway to Room 3
+[node name="DoorToRoom3" type="StaticBody3D" parent="." node_paths=PackedStringArray("door_hinge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0, -3.95)
+script = ExtResource("1_door")
+door_hinge = NodePath(".")
+is_open = true
+
+[node name="DoorMesh" type="MeshInstance3D" parent="DoorToRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.1, 0)
+mesh = SubResource("BoxMesh_door")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorToRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.1, 0)
+shape = SubResource("BoxShape3D_door")
+
+; Cool Slate Fluorescent LED Lights
+[node name="LabCeilingLight1" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 3.1, -1.5)
+light_color = Color(0.7, 0.9, 1, 1)
+light_energy = 2.0
+omni_range = 5.5
+omni_attenuation = 1.0
+
+[node name="LabCeilingLight2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 3.1, 1.5)
+light_color = Color(0.7, 0.9, 1, 1)
+light_energy = 2.0
+omni_range = 5.5
+omni_attenuation = 1.0

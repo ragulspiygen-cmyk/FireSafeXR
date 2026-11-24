@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://ext_cabinet_prop"]
+
+[ext_resource type="Script" path="res://scripts/extinguisher_cabinet.gd" id="1_cabinet"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_body_red"]
+albedo_color = Color(0.78, 0.1, 0.1, 1)
+roughness = 0.35
+metallic = 0.5
+
+[sub_resource type="StandardMaterial3D" id="Mat_body_black"]
+albedo_color = Color(0.18, 0.18, 0.2, 1)
+roughness = 0.35
+metallic = 0.5
+
+[sub_resource type="BoxMesh" id="Box_case"]
+size = Vector3(0.38, 0.65, 0.22)
+
+[sub_resource type="BoxShape3D" id="BoxShape_case"]
+size = Vector3(0.38, 0.65, 0.22)
+
+[sub_resource type="StandardMaterial3D" id="Mat_glass"]
+transparency = 1
+albedo_color = Color(0.7, 0.88, 1.0, 0.35)
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="Box_glass"]
+material = SubResource("Mat_glass")
+size = Vector3(0.28, 0.50, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="Mat_white_label"]
+albedo_color = Color(0.96, 0.96, 0.96, 1)
+roughness = 0.85
+
+[sub_resource type="BoxMesh" id="Box_label"]
+material = SubResource("Mat_white_label")
+size = Vector3(0.26, 0.1, 0.01)
+
+[sub_resource type="CylinderMesh" id="Cyl_ext_inside"]
+material = SubResource("Mat_body_red")
+top_radius = 0.06
+bottom_radius = 0.06
+height = 0.38
+
+[node name="ExtinguisherCabinet" type="StaticBody3D"]
+script = ExtResource("1_cabinet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape_case")
+
+[node name="CabinetBody" type="Node3D" parent="."]
+
+[node name="Case" type="MeshInstance3D" parent="CabinetBody"]
+mesh = SubResource("Box_case")
+
+[node name="GlassFront" type="MeshInstance3D" parent="CabinetBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0.115)
+mesh = SubResource("Box_glass")
+
+[node name="DoorMesh" type="MeshInstance3D" parent="CabinetBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0.116)
+mesh = SubResource("Box_glass")
+
+[node name="ExtLabel" type="MeshInstance3D" parent="CabinetBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22, 0.115)
+mesh = SubResource("Box_label")
+
+[node name="ExtInside" type="MeshInstance3D" parent="CabinetBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("Cyl_ext_inside")
+
+[node name="LockLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36, 0.18)
+light_color = Color(1, 0.1, 0.1, 1)
+light_energy = 1.2
+omni_range = 1.5

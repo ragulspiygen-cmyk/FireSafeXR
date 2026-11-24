@@ -1,0 +1,349 @@
+[gd_scene load_steps=28 format=3 uid="uid://player_rig_001"]
+
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_ctrl"]
+
+; Viewmodel meshes (pure visual — no collision)
+[sub_resource type="CylinderMesh" id="CM_ext_body"]
+top_radius = 0.055
+bottom_radius = 0.065
+height = 0.42
+
+[sub_resource type="StandardMaterial3D" id="M_ext_red"]
+albedo_color = Color(0.82, 0.08, 0.06, 1)
+
+[sub_resource type="CylinderMesh" id="CM_hose_nozzle"]
+top_radius = 0.03
+bottom_radius = 0.055
+height = 0.55
+
+[sub_resource type="StandardMaterial3D" id="M_hose_yel"]
+albedo_color = Color(0.85, 0.78, 0.12, 1)
+
+[sub_resource type="BoxMesh" id="BM_halligan"]
+size = Vector3(0.06, 0.06, 0.62)
+
+[sub_resource type="StandardMaterial3D" id="M_steel_dark"]
+albedo_color = Color(0.35, 0.36, 0.38, 1)
+metallic = 0.72
+roughness = 0.32
+
+[sub_resource type="BoxMesh" id="BM_thermal_body"]
+size = Vector3(0.12, 0.1, 0.22)
+
+[sub_resource type="CylinderMesh" id="CM_thermal_lens"]
+top_radius = 0.04
+bottom_radius = 0.04
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="M_thermal_body"]
+albedo_color = Color(0.15, 0.15, 0.18, 1)
+
+[sub_resource type="StandardMaterial3D" id="M_thermal_lens"]
+albedo_color = Color(0.12, 0.82, 0.95, 1)
+emission_enabled = true
+emission = Color(0.05, 0.5, 0.9, 1)
+emission_energy_multiplier = 1.8
+
+; HUD styles
+[sub_resource type="StyleBoxFlat" id="Style_hud_dark"]
+bg_color = Color(0, 0, 0, 0.58)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_tool_inactive"]
+bg_color = Color(0.12, 0.12, 0.16, 0.72)
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_width_left = 1
+border_color = Color(0.4, 0.4, 0.5, 0.8)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="Style_assessment"]
+bg_color = Color(0.04, 0.06, 0.10, 0.92)
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_width_left = 2
+border_color = Color(0.22, 0.58, 1.0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+; Collider
+[sub_resource type="CapsuleShape3D" id="CS_player"]
+radius = 0.4
+height = 1.7
+
+; Raycast layers
+[sub_resource type="SphereShape3D" id="SS_placeholder"]
+radius = 0.01
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_ctrl")
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CS_player")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+fov = 80.0
+
+[node name="InteractRay" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -3.2)
+collision_mask = 1
+collide_with_areas = false
+collide_with_bodies = true
+
+[node name="SprayRay" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, -0.05, -5.5)
+collision_mask = 3
+collide_with_areas = true
+collide_with_bodies = true
+
+; ── HAND PIVOT (viewmodel holder) ──────────────────────────────
+[node name="HandPivot" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38, -0.28, -0.52)
+
+; Thermal Camera viewmodel
+[node name="VMThermal" type="Node3D" parent="Camera3D/HandPivot"]
+visible = false
+[node name="Body" type="MeshInstance3D" parent="Camera3D/HandPivot/VMThermal"]
+mesh = SubResource("BM_thermal_body")
+surface_material_override/0 = SubResource("M_thermal_body")
+[node name="Lens" type="MeshInstance3D" parent="Camera3D/HandPivot/VMThermal"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0.12)
+mesh = SubResource("CM_thermal_lens")
+surface_material_override/0 = SubResource("M_thermal_lens")
+
+; Extinguisher viewmodel
+[node name="VMExtinguisher" type="Node3D" parent="Camera3D/HandPivot"]
+visible = true
+[node name="Cylinder" type="MeshInstance3D" parent="Camera3D/HandPivot/VMExtinguisher"]
+mesh = SubResource("CM_ext_body")
+surface_material_override/0 = SubResource("M_ext_red")
+
+; Water Hose viewmodel
+[node name="VMHose" type="Node3D" parent="Camera3D/HandPivot"]
+visible = false
+[node name="Nozzle" type="MeshInstance3D" parent="Camera3D/HandPivot/VMHose"]
+mesh = SubResource("CM_hose_nozzle")
+surface_material_override/0 = SubResource("M_hose_yel")
+
+; Halligan Bar viewmodel
+[node name="VMHalligan" type="Node3D" parent="Camera3D/HandPivot"]
+visible = false
+[node name="Bar" type="MeshInstance3D" parent="Camera3D/HandPivot/VMHalligan"]
+mesh = SubResource("BM_halligan")
+surface_material_override/0 = SubResource("M_steel_dark")
+
+; ── HUD (CanvasLayer) ──────────────────────────────────────────
+[node name="HUD" type="CanvasLayer" parent="."]
+
+; Full-screen thermal overlay — blue tint
+[node name="ThermalOverlay" type="ColorRect" parent="HUD"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.08, 0.35, 0.55)
+
+; Smoke vignette (red border when in smoke)
+[node name="SmokeVignette" type="ColorRect" parent="HUD"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.5, 0.08, 0.04, 0.38)
+
+; Crosshair
+[node name="Crosshair" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -10.0
+text = "+"
+add_theme_font_size_override = "font_size"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(1, 1, 1, 0.85)
+
+; Stage label (top left)
+[node name="StageLabel" type="Label" parent="HUD"]
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 480.0
+offset_bottom = 38.0
+text = "STAGE 1 — EXTERIOR ASSESSMENT"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.95, 0.85, 0.3, 1)
+
+; Timer (top right)
+[node name="TimerLabel" type="Label" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 14.0
+offset_right = -16.0
+offset_bottom = 38.0
+text = "00:00"
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 15
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+; Action prompt (bottom center, above toolbar)
+[node name="ActionPrompt" type="Label" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -128.0
+offset_right = 360.0
+offset_bottom = -76.0
+text = "Walk to the FIRE TRUCK and press E to pick up your toolkit"
+horizontal_alignment = 1
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 0.92)
+
+; No-toolkit hint
+[node name="NoToolkitHint" type="Label" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -58.0
+offset_right = 200.0
+offset_bottom = -12.0
+text = "🔴 NO TOOLKIT — Go to Fire Truck"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(1.0, 0.3, 0.3, 0.95)
+
+; ── TOOL BAR (bottom center) ───────────────────────────────────
+[node name="ToolBar" type="HBoxContainer" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -68.0
+offset_right = 220.0
+offset_bottom = -8.0
+custom_minimum_size = Vector2(0, 60)
+alignment = 1
+
+[node name="Tool1" type="PanelContainer" parent="HUD/ToolBar"]
+theme_override_styles/panel = SubResource("Style_tool_inactive")
+custom_minimum_size = Vector2(100, 58)
+[node name="Label" type="Label" parent="HUD/ToolBar/Tool1"]
+text = "[1]\nThermal"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="Tool2" type="PanelContainer" parent="HUD/ToolBar"]
+modulate = Color(1.5, 1.5, 0.5, 1)
+theme_override_styles/panel = SubResource("Style_tool_inactive")
+custom_minimum_size = Vector2(100, 58)
+[node name="Label" type="Label" parent="HUD/ToolBar/Tool2"]
+text = "[2]\nExtinguisher"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="Tool3" type="PanelContainer" parent="HUD/ToolBar"]
+theme_override_styles/panel = SubResource("Style_tool_inactive")
+custom_minimum_size = Vector2(100, 58)
+[node name="Label" type="Label" parent="HUD/ToolBar/Tool3"]
+text = "[3]\nWater Hose"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="Tool4" type="PanelContainer" parent="HUD/ToolBar"]
+theme_override_styles/panel = SubResource("Style_tool_inactive")
+custom_minimum_size = Vector2(100, 58)
+[node name="Label" type="Label" parent="HUD/ToolBar/Tool4"]
+text = "[4]\nHalligan Bar"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+; ── ASSESSMENT MODAL ──────────────────────────────────────────
+[node name="AssessmentPanel" type="PanelContainer" parent="HUD"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -270.0
+offset_right = 320.0
+offset_bottom = 270.0
+theme_override_styles/panel = SubResource("Style_assessment")
+
+[node name="VBox" type="VBoxContainer" parent="HUD/AssessmentPanel"]
+[node name="Title" type="Label" parent="HUD/AssessmentPanel/VBox"]
+text = "FIREFIGHTER INCIDENT ASSESSMENT REPORT"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color = Color(0.95, 0.82, 0.28, 1)
+
+[node name="Sep1" type="HSeparator" parent="HUD/AssessmentPanel/VBox"]
+
+[node name="LOverall" type="Label" parent="HUD/AssessmentPanel/VBox"]
+text = "Overall Score: --"
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.3, 1.0, 0.5, 1)
+
+[node name="LStatus" type="Label" parent="HUD/AssessmentPanel/VBox"]
+text = "Status: --"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14
+
+[node name="Sep2" type="HSeparator" parent="HUD/AssessmentPanel/VBox"]
+
+[node name="LEntry" type="Label" parent="HUD/AssessmentPanel/VBox"]
+text = "Scene Assessment: --"
+theme_override_font_sizes/font_size = 13
+
+[node name="LLR" type="Label" parent="HUD/AssessmentPanel/VBox"]
+text = "Living Room Fire (Class A): --"
+theme_override_font_sizes/font_size = 13
+
+[node name="LKT" type="Label" parent="HUD/AssessmentPanel/VBox"]
+text = "Kitchen Fire (Class B): --"
+theme_override_font_sizes/font_size = 13
+
+[node name="LThermal" type="Label" parent="HUD/AssessmentPanel/VBox"]
+text = "Thermal Camera Search: --"
+theme_override_font_sizes/font_size = 13
+
+[node name="LRescue" type="Label" parent="HUD/AssessmentPanel/VBox"]
+text = "Victim Rescue: --"
+theme_override_font_sizes/font_size = 13
+
+[node name="LTime" type="Label" parent="HUD/AssessmentPanel/VBox"]
+text = "Response Time: --"
+theme_override_font_sizes/font_size = 13

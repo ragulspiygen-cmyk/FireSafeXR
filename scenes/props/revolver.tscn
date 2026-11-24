@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://revolver_prop"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gun"]
+size = Vector3(0.06, 0.16, 0.28)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grip"]
+albedo_color = Color(0.25, 0.15, 0.08, 1)
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_metal"]
+albedo_color = Color(0.18, 0.2, 0.22, 1)
+roughness = 0.25
+metallic = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_grip"]
+material = SubResource("StandardMaterial3D_grip")
+size = Vector3(0.035, 0.1, 0.045)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cylinder"]
+material = SubResource("StandardMaterial3D_metal")
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_barrel"]
+material = SubResource("StandardMaterial3D_metal")
+top_radius = 0.015
+bottom_radius = 0.015
+height = 0.14
+
+[node name="Revolver" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0.02)
+shape = SubResource("BoxShape3D_gun")
+
+[node name="Grip" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0.04, -0.05)
+mesh = SubResource("BoxMesh_grip")
+
+[node name="RevolverCylinder" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.09, 0.02)
+mesh = SubResource("CylinderMesh_cylinder")
+
+[node name="Barrel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.095, 0.11)
+mesh = SubResource("CylinderMesh_barrel")

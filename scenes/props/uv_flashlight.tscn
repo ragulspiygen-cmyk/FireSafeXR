@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://uv_flashlight_prop"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_flashlight"]
+height = 0.25
+radius = 0.04
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_body"]
+albedo_color = Color(0.12, 0.1, 0.18, 1)
+roughness = 0.3
+metallic = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_body"]
+material = SubResource("StandardMaterial3D_body")
+top_radius = 0.03
+bottom_radius = 0.025
+height = 0.2
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lens"]
+albedo_color = Color(0.3, 0.1, 0.8, 1)
+emission_enabled = true
+emission = Color(0.5, 0.2, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_lens"]
+material = SubResource("StandardMaterial3D_lens")
+radius = 0.03
+height = 0.02
+
+[node name="UVFlashlight" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.03, 0)
+shape = SubResource("CylinderShape3D_flashlight")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.03, 0)
+mesh = SubResource("CylinderMesh_body")
+
+[node name="Lens" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.03, 0.1)
+mesh = SubResource("SphereMesh_lens")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.03, 0.11)
+light_color = Color(0.6, 0.2, 1, 1)
+light_energy = 3.5
+spot_range = 6.0
+spot_angle = 25.0

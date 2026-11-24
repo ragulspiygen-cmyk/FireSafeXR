@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://keycard_prop"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_card"]
+size = Vector3(0.08, 0.005, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_card"]
+albedo_color = Color(0.95, 0.95, 0.95, 1)
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_card"]
+material = SubResource("StandardMaterial3D_card")
+size = Vector3(0.08, 0.003, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stripe"]
+albedo_color = Color(0.1, 0.5, 0.9, 1)
+metallic = 0.5
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_stripe"]
+material = SubResource("StandardMaterial3D_stripe")
+size = Vector3(0.08, 0.004, 0.02)
+
+[node name="Keycard" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0025, 0)
+shape = SubResource("BoxShape3D_card")
+
+[node name="CardBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+mesh = SubResource("BoxMesh_card")
+
+[node name="Stripe" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, 0.03)
+mesh = SubResource("BoxMesh_stripe")

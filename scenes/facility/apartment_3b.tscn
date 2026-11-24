@@ -1,0 +1,768 @@
+[gd_scene load_steps=75 format=3 uid="uid://apartment_3b_scene"]
+
+[ext_resource type="PackedScene" uid="uid://fire_hazard_prop" path="res://scenes/props/fire_hazard.tscn" id="1_fire"]
+[ext_resource type="PackedScene" uid="uid://alarm_strobe_prop" path="res://scenes/props/alarm_strobe.tscn" id="2_strobe"]
+[ext_resource type="PackedScene" uid="uid://emergency_exit_sign_prop" path="res://scenes/props/emergency_exit_sign.tscn" id="3_exit"]
+[ext_resource type="PackedScene" uid="uid://ext_cabinet_prop" path="res://scenes/props/extinguisher_cabinet.tscn" id="4_cab"]
+
+; ── MATERIALS ───────────────────────────────────────
+[sub_resource type="StandardMaterial3D" id="M_oak"]
+albedo_color = Color(0.54, 0.38, 0.21, 1)
+roughness = 0.65
+
+[sub_resource type="StandardMaterial3D" id="M_wall"]
+albedo_color = Color(0.90, 0.88, 0.82, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="M_ceil"]
+albedo_color = Color(0.96, 0.96, 0.96, 1)
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="M_tile"]
+albedo_color = Color(0.74, 0.74, 0.72, 1)
+roughness = 0.50
+
+[sub_resource type="StandardMaterial3D" id="M_hfloor"]
+albedo_color = Color(0.32, 0.30, 0.30, 1)
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="M_hwall"]
+albedo_color = Color(0.55, 0.54, 0.52, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="M_conc"]
+albedo_color = Color(0.44, 0.44, 0.46, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="M_sofa"]
+albedo_color = Color(0.28, 0.28, 0.33, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="M_wood"]
+albedo_color = Color(0.22, 0.14, 0.07, 1)
+roughness = 0.58
+
+[sub_resource type="StandardMaterial3D" id="M_steel"]
+albedo_color = Color(0.68, 0.68, 0.70, 1)
+metallic = 0.88
+roughness = 0.28
+
+[sub_resource type="StandardMaterial3D" id="M_counter"]
+albedo_color = Color(0.18, 0.18, 0.21, 1)
+roughness = 0.42
+
+[sub_resource type="StandardMaterial3D" id="M_green"]
+albedo_color = Color(0.08, 0.72, 0.18, 1)
+roughness = 0.75
+
+; ── LIVING ROOM ARCHITECTURE ───────────────────────
+[sub_resource type="BoxMesh" id="BM_lr_floor"]
+material = SubResource("M_oak")
+size = Vector3(8.3, 0.18, 7.0)
+
+[sub_resource type="BoxShape3D" id="BS_lr_floor"]
+size = Vector3(8.3, 0.18, 7.0)
+
+[sub_resource type="BoxMesh" id="BM_lr_ceil"]
+material = SubResource("M_ceil")
+size = Vector3(8.3, 0.14, 7.0)
+
+[sub_resource type="BoxShape3D" id="BS_lr_ceil"]
+size = Vector3(8.3, 0.14, 7.0)
+
+[sub_resource type="BoxMesh" id="BM_w8"]
+material = SubResource("M_wall")
+size = Vector3(8.3, 3.0, 0.14)
+
+[sub_resource type="BoxShape3D" id="BS_w8"]
+size = Vector3(8.3, 3.0, 0.14)
+
+[sub_resource type="BoxMesh" id="BM_wlr_side"]
+material = SubResource("M_wall")
+size = Vector3(0.14, 3.0, 7.0)
+
+[sub_resource type="BoxShape3D" id="BS_wlr_side"]
+size = Vector3(0.14, 3.0, 7.0)
+
+[sub_resource type="BoxMesh" id="BM_wback_half"]
+material = SubResource("M_wall")
+size = Vector3(3.45, 3.0, 0.14)
+
+[sub_resource type="BoxShape3D" id="BS_wback_half"]
+size = Vector3(3.45, 3.0, 0.14)
+
+[sub_resource type="BoxMesh" id="BM_lintel_hall"]
+material = SubResource("M_wall")
+size = Vector3(1.4, 0.75, 0.14)
+
+[sub_resource type="BoxShape3D" id="BS_lintel_hall"]
+size = Vector3(1.4, 0.75, 0.14)
+
+[sub_resource type="BoxMesh" id="BM_wlr_right_half"]
+material = SubResource("M_wall")
+size = Vector3(0.14, 3.0, 2.8)
+
+[sub_resource type="BoxShape3D" id="BS_wlr_right_half"]
+size = Vector3(0.14, 3.0, 2.8)
+
+[sub_resource type="BoxMesh" id="BM_lintel_kt"]
+material = SubResource("M_wall")
+size = Vector3(0.14, 0.75, 1.4)
+
+[sub_resource type="BoxShape3D" id="BS_lintel_kt"]
+size = Vector3(0.14, 0.75, 1.4)
+
+; ── KITCHEN ARCHITECTURE ───────────────────────────
+[sub_resource type="BoxMesh" id="BM_kt_floor"]
+material = SubResource("M_tile")
+size = Vector3(5.0, 0.18, 6.0)
+
+[sub_resource type="BoxShape3D" id="BS_kt_floor"]
+size = Vector3(5.0, 0.18, 6.0)
+
+[sub_resource type="BoxMesh" id="BM_kt_ceil"]
+material = SubResource("M_ceil")
+size = Vector3(5.0, 0.14, 6.0)
+
+[sub_resource type="BoxShape3D" id="BS_kt_ceil"]
+size = Vector3(5.0, 0.14, 6.0)
+
+[sub_resource type="BoxMesh" id="BM_wkt_side"]
+material = SubResource("M_wall")
+size = Vector3(0.14, 3.0, 6.0)
+
+[sub_resource type="BoxShape3D" id="BS_wkt_side"]
+size = Vector3(0.14, 3.0, 6.0)
+
+[sub_resource type="BoxMesh" id="BM_w5"]
+material = SubResource("M_wall")
+size = Vector3(5.0, 3.0, 0.14)
+
+[sub_resource type="BoxShape3D" id="BS_w5"]
+size = Vector3(5.0, 3.0, 0.14)
+
+; ── HALLWAY ARCHITECTURE ───────────────────────────
+[sub_resource type="BoxMesh" id="BM_hall_floor"]
+material = SubResource("M_hfloor")
+size = Vector3(2.5, 0.18, 9.0)
+
+[sub_resource type="BoxShape3D" id="BS_hall_floor"]
+size = Vector3(2.5, 0.18, 9.0)
+
+[sub_resource type="BoxMesh" id="BM_hall_ceil"]
+material = SubResource("M_ceil")
+size = Vector3(2.5, 0.14, 9.0)
+
+[sub_resource type="BoxShape3D" id="BS_hall_ceil"]
+size = Vector3(2.5, 0.14, 9.0)
+
+[sub_resource type="BoxMesh" id="BM_hall_wall"]
+material = SubResource("M_hwall")
+size = Vector3(0.14, 3.0, 9.0)
+
+[sub_resource type="BoxShape3D" id="BS_hall_wall"]
+size = Vector3(0.14, 3.0, 9.0)
+
+[sub_resource type="BoxMesh" id="BM_hall_end"]
+material = SubResource("M_hwall")
+size = Vector3(2.5, 3.0, 0.14)
+
+[sub_resource type="BoxShape3D" id="BS_hall_end"]
+size = Vector3(2.5, 3.0, 0.14)
+
+; ── STAIRWELL + GROUND ─────────────────────────────
+[sub_resource type="BoxMesh" id="BM_step"]
+material = SubResource("M_conc")
+size = Vector3(2.4, 0.18, 0.38)
+
+[sub_resource type="BoxShape3D" id="BS_step"]
+size = Vector3(2.4, 0.18, 0.38)
+
+[sub_resource type="BoxMesh" id="BM_stair_wall"]
+material = SubResource("M_conc")
+size = Vector3(0.14, 5.0, 7.0)
+
+[sub_resource type="BoxShape3D" id="BS_stair_wall"]
+size = Vector3(0.14, 5.0, 7.0)
+
+[sub_resource type="BoxMesh" id="BM_ground"]
+material = SubResource("M_conc")
+size = Vector3(10.0, 0.18, 10.0)
+
+[sub_resource type="BoxShape3D" id="BS_ground"]
+size = Vector3(10.0, 0.18, 10.0)
+
+[sub_resource type="BoxMesh" id="BM_assembly"]
+material = SubResource("M_green")
+size = Vector3(3.5, 0.02, 3.5)
+
+; ── FURNITURE MESHES ───────────────────────────────
+[sub_resource type="BoxMesh" id="BM_sofa_seat"]
+material = SubResource("M_sofa")
+size = Vector3(2.2, 0.44, 0.85)
+
+[sub_resource type="BoxMesh" id="BM_sofa_back"]
+material = SubResource("M_sofa")
+size = Vector3(2.2, 0.65, 0.2)
+
+[sub_resource type="BoxMesh" id="BM_coffee"]
+material = SubResource("M_wood")
+size = Vector3(1.1, 0.05, 0.6)
+
+[sub_resource type="BoxMesh" id="BM_tv_unit"]
+material = SubResource("M_wood")
+size = Vector3(1.8, 0.45, 0.38)
+
+[sub_resource type="BoxMesh" id="BM_tv_screen"]
+material = SubResource("M_counter")
+size = Vector3(1.55, 0.9, 0.06)
+
+[sub_resource type="BoxMesh" id="BM_shelf"]
+material = SubResource("M_wood")
+size = Vector3(0.36, 2.0, 1.2)
+
+[sub_resource type="BoxShape3D" id="BS_shelf"]
+size = Vector3(0.36, 2.0, 1.2)
+
+[sub_resource type="BoxMesh" id="BM_counter_body"]
+material = SubResource("M_wood")
+size = Vector3(2.8, 0.9, 0.65)
+
+[sub_resource type="BoxShape3D" id="BS_counter_body"]
+size = Vector3(2.8, 0.9, 0.65)
+
+[sub_resource type="BoxMesh" id="BM_counter_top"]
+material = SubResource("M_counter")
+size = Vector3(2.9, 0.05, 0.7)
+
+[sub_resource type="BoxMesh" id="BM_upper_cab"]
+material = SubResource("M_ceil")
+size = Vector3(2.8, 0.6, 0.35)
+
+[sub_resource type="BoxMesh" id="BM_fridge"]
+material = SubResource("M_steel")
+size = Vector3(0.72, 1.85, 0.72)
+
+[sub_resource type="BoxShape3D" id="BS_fridge"]
+size = Vector3(0.72, 1.85, 0.72)
+
+[sub_resource type="BoxMesh" id="BM_stove"]
+material = SubResource("M_steel")
+size = Vector3(0.72, 0.9, 0.65)
+
+[sub_resource type="BoxShape3D" id="BS_stove"]
+size = Vector3(0.72, 0.9, 0.65)
+
+; ── EVACUATION ─────────────────────────────────────
+[sub_resource type="SphereShape3D" id="SS_evac"]
+radius = 2.5
+
+; ═══════════════════════════════════════════════════
+;  SCENE NODES
+; ═══════════════════════════════════════════════════
+[node name="Apartment3B" type="Node3D"]
+
+; ══════════════════════════════════════════
+;  LIVING ROOM  X:-4.15..4.15  Z:-3.5..3.5
+; ══════════════════════════════════════════
+[node name="LivingRoom" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+[node name="Mesh" type="MeshInstance3D" parent="LivingRoom/Floor"]
+mesh = SubResource("BM_lr_floor")
+[node name="Col" type="CollisionShape3D" parent="LivingRoom/Floor"]
+shape = SubResource("BS_lr_floor")
+
+[node name="Ceiling" type="StaticBody3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.07, 0)
+[node name="Mesh" type="MeshInstance3D" parent="LivingRoom/Ceiling"]
+mesh = SubResource("BM_lr_ceil")
+[node name="Col" type="CollisionShape3D" parent="LivingRoom/Ceiling"]
+shape = SubResource("BS_lr_ceil")
+
+[node name="WallFront" type="StaticBody3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3.57)
+[node name="Mesh" type="MeshInstance3D" parent="LivingRoom/WallFront"]
+mesh = SubResource("BM_w8")
+[node name="Col" type="CollisionShape3D" parent="LivingRoom/WallFront"]
+shape = SubResource("BS_w8")
+
+[node name="WallLeft" type="StaticBody3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.22, 1.5, 0)
+[node name="Mesh" type="MeshInstance3D" parent="LivingRoom/WallLeft"]
+mesh = SubResource("BM_wlr_side")
+[node name="Col" type="CollisionShape3D" parent="LivingRoom/WallLeft"]
+shape = SubResource("BS_wlr_side")
+
+; Back wall — left half (X: -4.15 to -0.7)
+[node name="WallBackL" type="StaticBody3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.425, 1.5, -3.57)
+[node name="Mesh" type="MeshInstance3D" parent="LivingRoom/WallBackL"]
+mesh = SubResource("BM_wback_half")
+[node name="Col" type="CollisionShape3D" parent="LivingRoom/WallBackL"]
+shape = SubResource("BS_wback_half")
+
+; Back wall — right half (X: 0.7 to 4.15)
+[node name="WallBackR" type="StaticBody3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.425, 1.5, -3.57)
+[node name="Mesh" type="MeshInstance3D" parent="LivingRoom/WallBackR"]
+mesh = SubResource("BM_wback_half")
+[node name="Col" type="CollisionShape3D" parent="LivingRoom/WallBackR"]
+shape = SubResource("BS_wback_half")
+
+; Back wall — lintel above hallway doorway
+[node name="WallBackLintel" type="StaticBody3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.625, -3.57)
+[node name="Mesh" type="MeshInstance3D" parent="LivingRoom/WallBackLintel"]
+mesh = SubResource("BM_lintel_hall")
+[node name="Col" type="CollisionShape3D" parent="LivingRoom/WallBackLintel"]
+shape = SubResource("BS_lintel_hall")
+
+; Right wall — kitchen doorway at Z:-0.7..0.7
+; Front half Z:0.7..3.5
+[node name="WallRightFront" type="StaticBody3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.22, 1.5, 2.1)
+[node name="Mesh" type="MeshInstance3D" parent="LivingRoom/WallRightFront"]
+mesh = SubResource("BM_wlr_right_half")
+[node name="Col" type="CollisionShape3D" parent="LivingRoom/WallRightFront"]
+shape = SubResource("BS_wlr_right_half")
+
+; Back half Z:-3.5..-0.7
+[node name="WallRightBack" type="StaticBody3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.22, 1.5, -2.1)
+[node name="Mesh" type="MeshInstance3D" parent="LivingRoom/WallRightBack"]
+mesh = SubResource("BM_wlr_right_half")
+[node name="Col" type="CollisionShape3D" parent="LivingRoom/WallRightBack"]
+shape = SubResource("BS_wlr_right_half")
+
+; Kitchen doorway lintel (Z:-0.7..0.7, Y:2.25..3.0)
+[node name="WallRightLintel" type="StaticBody3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.22, 2.625, 0)
+[node name="Mesh" type="MeshInstance3D" parent="LivingRoom/WallRightLintel"]
+mesh = SubResource("BM_lintel_kt")
+[node name="Col" type="CollisionShape3D" parent="LivingRoom/WallRightLintel"]
+shape = SubResource("BS_lintel_kt")
+
+; Room light
+[node name="Light" type="OmniLight3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+light_color = Color(1.0, 0.95, 0.85, 1)
+light_energy = 2.0
+omni_range = 7.5
+omni_attenuation = 0.8
+
+; Alarm
+[node name="Strobe" parent="LivingRoom" instance=ExtResource("2_strobe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2.95, 0.5)
+
+; ── LIVING ROOM FURNITURE ──────────────────────────
+; Sofa against front wall
+[node name="SofaSeat" type="MeshInstance3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.22, 2.72)
+mesh = SubResource("BM_sofa_seat")
+
+[node name="SofaBack" type="MeshInstance3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.66, 3.08)
+mesh = SubResource("BM_sofa_back")
+
+; Coffee table
+[node name="CoffeeTable" type="MeshInstance3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.42, 1.65)
+mesh = SubResource("BM_coffee")
+
+; TV unit facing sofa
+[node name="TVUnit" type="MeshInstance3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.225, -1.2)
+mesh = SubResource("BM_tv_unit")
+
+[node name="TVScreen" type="MeshInstance3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 1.0, -1.38)
+mesh = SubResource("BM_tv_screen")
+
+; Bookshelf against left wall
+[node name="Bookshelf" type="StaticBody3D" parent="LivingRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95, 1.0, 1.2)
+[node name="Mesh" type="MeshInstance3D" parent="LivingRoom/Bookshelf"]
+mesh = SubResource("BM_shelf")
+[node name="Col" type="CollisionShape3D" parent="LivingRoom/Bookshelf"]
+shape = SubResource("BS_shelf")
+
+; ABC extinguisher cabinet
+[node name="CabinetABC" parent="LivingRoom" instance=ExtResource("4_cab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.62, 1.5, -1.5)
+extinguisher_type = "abc_dry"
+extinguisher_label = "ABC Dry Chemical"
+cabinet_id = "lr_abc"
+
+; Sofa fire — Class A
+[node name="SofaFire" parent="LivingRoom" instance=ExtResource("1_fire")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.0, 2.5)
+hazard_name = "Sofa Fabric Fire"
+hazard_class = "A"
+required_extinguisher_types = ["abc_dry", "water"]
+
+; Exit sign pointing toward hallway
+[node name="ExitSign" parent="LivingRoom" instance=ExtResource("3_exit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, -3.45)
+
+; ══════════════════════════════════════════
+;  KITCHEN  X:4.15..9.15  Z:-3.5..2.5
+;  Local origin at world (6.65, 0, -0.5)
+; ══════════════════════════════════════════
+[node name="Kitchen" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.65, 0, -0.5)
+
+[node name="Floor" type="StaticBody3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+[node name="Mesh" type="MeshInstance3D" parent="Kitchen/Floor"]
+mesh = SubResource("BM_kt_floor")
+[node name="Col" type="CollisionShape3D" parent="Kitchen/Floor"]
+shape = SubResource("BS_kt_floor")
+
+[node name="Ceiling" type="StaticBody3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.07, 0)
+[node name="Mesh" type="MeshInstance3D" parent="Kitchen/Ceiling"]
+mesh = SubResource("BM_kt_ceil")
+[node name="Col" type="CollisionShape3D" parent="Kitchen/Ceiling"]
+shape = SubResource("BS_kt_ceil")
+
+; Right wall (local X = 2.5 = world 9.15)
+[node name="WallRight" type="StaticBody3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57, 1.5, 0)
+[node name="Mesh" type="MeshInstance3D" parent="Kitchen/WallRight"]
+mesh = SubResource("BM_wkt_side")
+[node name="Col" type="CollisionShape3D" parent="Kitchen/WallRight"]
+shape = SubResource("BS_wkt_side")
+
+; Back wall (local Z = -3.0 = world -3.5)
+[node name="WallBack" type="StaticBody3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3.07)
+[node name="Mesh" type="MeshInstance3D" parent="Kitchen/WallBack"]
+mesh = SubResource("BM_w5")
+[node name="Col" type="CollisionShape3D" parent="Kitchen/WallBack"]
+shape = SubResource("BS_w5")
+
+; Front wall (local Z = 3.0 = world 2.5)
+[node name="WallFront" type="StaticBody3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3.07)
+[node name="Mesh" type="MeshInstance3D" parent="Kitchen/WallFront"]
+mesh = SubResource("BM_w5")
+[node name="Col" type="CollisionShape3D" parent="Kitchen/WallFront"]
+shape = SubResource("BS_w5")
+
+; Kitchen light (brighter, cooler white)
+[node name="Light" type="OmniLight3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+light_color = Color(0.92, 0.96, 1.0, 1)
+light_energy = 1.9
+omni_range = 6.0
+omni_attenuation = 0.9
+
+[node name="Strobe" parent="Kitchen" instance=ExtResource("2_strobe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.95, 1.0)
+
+; ── KITCHEN FURNITURE ─────────────────────────────
+; Counter along back wall
+[node name="CounterBody" type="StaticBody3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -2.4)
+[node name="Mesh" type="MeshInstance3D" parent="Kitchen/CounterBody"]
+mesh = SubResource("BM_counter_body")
+[node name="Col" type="CollisionShape3D" parent="Kitchen/CounterBody"]
+shape = SubResource("BS_counter_body")
+
+[node name="CounterTop" type="MeshInstance3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93, -2.4)
+mesh = SubResource("BM_counter_top")
+
+[node name="UpperCabinets" type="MeshInstance3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, -2.55)
+mesh = SubResource("BM_upper_cab")
+
+; Fridge on right wall
+[node name="Fridge" type="StaticBody3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0, 0.925, 1.5)
+[node name="Mesh" type="MeshInstance3D" parent="Kitchen/Fridge"]
+mesh = SubResource("BM_fridge")
+[node name="Col" type="CollisionShape3D" parent="Kitchen/Fridge"]
+shape = SubResource("BS_fridge")
+
+; Stove — source of grease fire
+[node name="Stove" type="StaticBody3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0, 0.45, -2.4)
+[node name="Mesh" type="MeshInstance3D" parent="Kitchen/Stove"]
+mesh = SubResource("BM_stove")
+[node name="Col" type="CollisionShape3D" parent="Kitchen/Stove"]
+shape = SubResource("BS_stove")
+
+; CO2 cabinet (correct for Class B grease fire)
+[node name="CabinetCO2" parent="Kitchen" instance=ExtResource("4_cab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, 1.5, -0.6)
+extinguisher_type = "co2"
+extinguisher_label = "CO2 Extinguisher"
+cabinet_id = "kt_co2"
+
+; Water cabinet (wrong choice — causes dangerous flare-up on grease fire)
+[node name="CabinetWater" parent="Kitchen" instance=ExtResource("4_cab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, 1.5, 0.5)
+extinguisher_type = "water"
+extinguisher_label = "Water Extinguisher"
+cabinet_id = "kt_water"
+
+; Stove grease fire — Class B
+[node name="StoveFire" parent="Kitchen" instance=ExtResource("1_fire")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0, 0.91, -2.2)
+hazard_name = "Stove Grease Pan Fire"
+hazard_class = "B"
+required_extinguisher_types = ["co2", "abc_dry"]
+
+[node name="ExitSign" parent="Kitchen" instance=ExtResource("3_exit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0.4, 1.0)
+
+; ══════════════════════════════════════════
+;  HALLWAY  X:-1.25..1.25  Z:-3.5..-12.5
+;  Node3D origin at world (0, 0, -8.0)
+; ══════════════════════════════════════════
+[node name="Hallway" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.0)
+
+[node name="Floor" type="StaticBody3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/Floor"]
+mesh = SubResource("BM_hall_floor")
+[node name="Col" type="CollisionShape3D" parent="Hallway/Floor"]
+shape = SubResource("BS_hall_floor")
+
+[node name="Ceiling" type="StaticBody3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.07, 0)
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/Ceiling"]
+mesh = SubResource("BM_hall_ceil")
+[node name="Col" type="CollisionShape3D" parent="Hallway/Ceiling"]
+shape = SubResource("BS_hall_ceil")
+
+[node name="WallLeft" type="StaticBody3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32, 1.5, 0)
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/WallLeft"]
+mesh = SubResource("BM_hall_wall")
+[node name="Col" type="CollisionShape3D" parent="Hallway/WallLeft"]
+shape = SubResource("BS_hall_wall")
+
+[node name="WallRight" type="StaticBody3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32, 1.5, 0)
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/WallRight"]
+mesh = SubResource("BM_hall_wall")
+[node name="Col" type="CollisionShape3D" parent="Hallway/WallRight"]
+shape = SubResource("BS_hall_wall")
+
+; End wall at stairwell entrance (local Z=-4.5 = world Z=-12.5)
+[node name="WallEnd" type="StaticBody3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -4.57)
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/WallEnd"]
+mesh = SubResource("BM_hall_end")
+[node name="Col" type="CollisionShape3D" parent="Hallway/WallEnd"]
+shape = SubResource("BS_hall_end")
+
+; Emergency lighting — dim blue-tinted (fire emergency)
+[node name="Light1" type="OmniLight3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 2.0)
+light_color = Color(0.55, 0.65, 1.0, 1)
+light_energy = 0.85
+omni_range = 4.2
+
+[node name="Light2" type="OmniLight3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, -2.5)
+light_color = Color(0.55, 0.65, 1.0, 1)
+light_energy = 0.85
+omni_range = 4.2
+
+; Exit signs at floor level (per NFPA — smoke rises, signs are low)
+[node name="ExitSign1" parent="Hallway" instance=ExtResource("3_exit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 2.5)
+
+[node name="ExitSign2" parent="Hallway" instance=ExtResource("3_exit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -1.5)
+
+; Smoke filling the corridor
+[node name="Smoke" type="CPUParticles3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
+amount = 16
+lifetime = 4.0
+emission_shape = 1
+emission_sphere_radius = 0.9
+direction = Vector3(0.1, 0, 0)
+spread = 30.0
+gravity = Vector3(0, 0.05, 0)
+initial_velocity_min = 0.15
+initial_velocity_max = 0.45
+scale_amount_min = 1.5
+scale_amount_max = 4.0
+
+; ══════════════════════════════════════════
+;  STAIRWELL  descending from Z=-12.5 to Z=-19.5
+;  Node3D origin at world (0, 0, -16.0)
+; ══════════════════════════════════════════
+[node name="Stairwell" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.0)
+
+[node name="WallLeft" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32, -0.5, 0)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/WallLeft"]
+mesh = SubResource("BM_stair_wall")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/WallLeft"]
+shape = SubResource("BS_stair_wall")
+
+[node name="WallRight" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32, -0.5, 0)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/WallRight"]
+mesh = SubResource("BM_stair_wall")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/WallRight"]
+shape = SubResource("BS_stair_wall")
+
+[node name="Light" type="OmniLight3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, -1.5)
+light_color = Color(0.85, 0.9, 1.0, 1)
+light_energy = 1.8
+omni_range = 6.0
+
+[node name="ExitSignStair" parent="Stairwell" instance=ExtResource("3_exit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2.5)
+
+; 15 steps — each 0.38m deep, 0.2m rise
+[node name="Step01" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, -0.5)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step01"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step01"]
+shape = SubResource("BS_step")
+
+[node name="Step02" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29, -0.88)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step02"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step02"]
+shape = SubResource("BS_step")
+
+[node name="Step03" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49, -1.26)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step03"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step03"]
+shape = SubResource("BS_step")
+
+[node name="Step04" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.69, -1.64)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step04"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step04"]
+shape = SubResource("BS_step")
+
+[node name="Step05" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.89, -2.02)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step05"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step05"]
+shape = SubResource("BS_step")
+
+[node name="Step06" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.09, -2.40)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step06"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step06"]
+shape = SubResource("BS_step")
+
+[node name="Step07" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.29, -2.78)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step07"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step07"]
+shape = SubResource("BS_step")
+
+[node name="Step08" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.49, -3.16)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step08"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step08"]
+shape = SubResource("BS_step")
+
+[node name="Step09" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.69, -3.54)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step09"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step09"]
+shape = SubResource("BS_step")
+
+[node name="Step10" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.89, -3.92)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step10"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step10"]
+shape = SubResource("BS_step")
+
+[node name="Step11" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.09, -4.30)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step11"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step11"]
+shape = SubResource("BS_step")
+
+[node name="Step12" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.29, -4.68)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step12"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step12"]
+shape = SubResource("BS_step")
+
+[node name="Step13" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.49, -5.06)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step13"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step13"]
+shape = SubResource("BS_step")
+
+[node name="Step14" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.69, -5.44)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step14"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step14"]
+shape = SubResource("BS_step")
+
+[node name="Step15" type="StaticBody3D" parent="Stairwell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.89, -5.82)
+[node name="Mesh" type="MeshInstance3D" parent="Stairwell/Step15"]
+mesh = SubResource("BM_step")
+[node name="Col" type="CollisionShape3D" parent="Stairwell/Step15"]
+shape = SubResource("BS_step")
+
+; ══════════════════════════════════════════
+;  GROUND ASSEMBLY POINT  Y=-3.0  Z=-22.5
+; ══════════════════════════════════════════
+[node name="GroundAssembly" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.0, -22.5)
+
+[node name="Floor" type="StaticBody3D" parent="GroundAssembly"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+[node name="Mesh" type="MeshInstance3D" parent="GroundAssembly/Floor"]
+mesh = SubResource("BM_ground")
+[node name="Col" type="CollisionShape3D" parent="GroundAssembly/Floor"]
+shape = SubResource("BS_ground")
+
+[node name="AssemblyDecal" type="MeshInstance3D" parent="GroundAssembly"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("BM_assembly")
+
+[node name="Light" type="OmniLight3D" parent="GroundAssembly"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0, 0)
+light_color = Color(0.9, 0.95, 1.0, 1)
+light_energy = 3.5
+omni_range = 10.0
+
+[node name="ExitSign" parent="GroundAssembly" instance=ExtResource("3_exit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -3.5)
+
+; ══════════════════════════════════════════
+;  EVACUATION TRIGGER (triggers assessment)
+; ══════════════════════════════════════════
+[node name="EvacuationZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, -22.5)
+[node name="Col" type="CollisionShape3D" parent="EvacuationZone"]
+shape = SubResource("SS_evac")
